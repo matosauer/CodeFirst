@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CodeFirst.Domain": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

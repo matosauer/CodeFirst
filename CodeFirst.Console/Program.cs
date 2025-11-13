@@ -10,20 +10,24 @@ namespace CodeFirst.Console
     {
         static void Main(string[] args)
         {
-            Host.CreateDefaultBuilder(args)
-                .ConfigureServices((context, services) =>
-                {
-                    var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
+            var host = Host.CreateDefaultBuilder(args)
+               .ConfigureServices((context, services) =>
+               {
+                   var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
+                   services.AddDbContext<BloggingContext>(options =>
+                       options.UseSqlServer(connectionString));
 
-                    services.AddDbContext<BloggingContext>(options =>
-                        options.UseSqlServer(connectionString));
+                   services.AddTransient<Worker>();
+               })
+               .Build();
 
-                    services.AddTransient<Worker>();
-                })
-                .Build()
-                .Services
-                .GetRequiredService<Worker>()
-                .Run();
+            using (var scope = host.Services.CreateScope())
+            {
+                scope
+                    .ServiceProvider
+                    .GetRequiredService<Worker>()
+                    .Run();
+            }
         }
     }
 }
