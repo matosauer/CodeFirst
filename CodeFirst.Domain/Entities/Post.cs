@@ -15,6 +15,6 @@ namespace CodeFirst.Domain.Entities
         //public int BlogId { get; set; }
         //public virtual Blog Blog { get; set; }
 
-        public Blog Blog { get; set; }
+        //public required Blog Blog { get; set; }
     }
 }

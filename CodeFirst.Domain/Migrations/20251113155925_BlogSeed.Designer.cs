@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeFirst.Domain.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20251112183242_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20251113155925_BlogSeed")]
+    partial class BlogSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,13 @@ namespace CodeFirst.Domain.Migrations
                     b.HasKey("BlogId");
 
                     b.ToTable("Blogs");
+
+                    b.HasData(
+                        new
+                        {
+                            BlogId = 1,
+                            Name = "name"
+                        });
                 });
 
             modelBuilder.Entity("CodeFirst.Domain.Entities.Post", b =>
@@ -48,7 +55,7 @@ namespace CodeFirst.Domain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"));
 
-                    b.Property<int>("BlogId")
+                    b.Property<int?>("BlogId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -66,13 +73,9 @@ namespace CodeFirst.Domain.Migrations
 
             modelBuilder.Entity("CodeFirst.Domain.Entities.Post", b =>
                 {
-                    b.HasOne("CodeFirst.Domain.Entities.Blog", "Blog")
+                    b.HasOne("CodeFirst.Domain.Entities.Blog", null)
                         .WithMany("Posts")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
+                        .HasForeignKey("BlogId");
                 });
 
             modelBuilder.Entity("CodeFirst.Domain.Entities.Blog", b =>
