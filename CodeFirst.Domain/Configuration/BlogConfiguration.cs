@@ -18,8 +18,12 @@ namespace CodeFirst.Domain.Configuration
                 {
                     BlogId = 1,
                     Name = "name"                    
+                },
+                new Blog
+                {
+                    BlogId = 2,
+                    Name = "second"
                 }
-
              );
         }
     }
