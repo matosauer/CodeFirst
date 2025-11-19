@@ -19,6 +19,11 @@ namespace CodeFirst.Domain
             modelBuilder.ApplyConfiguration(new BlogConfiguration());
 
 
+            //modelBuilder.Entity<Blog>()
+            //   .HasMany(f => f.Posts)
+            //   .WithOne(s => s.Blog)
+            //   .HasForeignKey(s => s.BlogId);
+
         }
     }
 }

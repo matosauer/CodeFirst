@@ -25,6 +25,7 @@
 	<ItemGroup>
 		<!-- EF Core provider (for runtime use, not design time) -->
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.11" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.11" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.11" />
 
 		<!-- Hosting and Configuration support -->

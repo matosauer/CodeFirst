@@ -14,8 +14,12 @@ namespace CodeFirst.Console
                .ConfigureServices((context, services) =>
                {
                    var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
-                   services.AddDbContext<BloggingContext>(options =>
-                       options.UseSqlServer(connectionString));
+                   services.AddDbContext<BloggingContext>(options =>                       
+                           options
+                            .UseSqlServer(connectionString)
+                           // Lazy Loading
+                           //.UseLazyLoadingProxies()
+                           );
 
                    services.AddTransient<Worker>();
                })
@@ -26,7 +30,8 @@ namespace CodeFirst.Console
                 scope
                     .ServiceProvider
                     .GetRequiredService<Worker>()
-                    .Run();
+                    .RunAsync()
+                    .Wait();
             }
         }
     }

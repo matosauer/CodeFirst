@@ -3,6 +3,7 @@ using CodeFirst.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeFirst.Domain.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    partial class BloggingContextModelSnapshot : ModelSnapshot
+    [Migration("20251117213347_AddPost")]
+    partial class AddPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +60,7 @@ namespace CodeFirst.Domain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"));
 
-                    b.Property<int>("BlogId")
+                    b.Property<int?>("BlogId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -75,13 +78,9 @@ namespace CodeFirst.Domain.Migrations
 
             modelBuilder.Entity("CodeFirst.Domain.Entities.Post", b =>
                 {
-                    b.HasOne("CodeFirst.Domain.Entities.Blog", "Blog")
+                    b.HasOne("CodeFirst.Domain.Entities.Blog", null)
                         .WithMany("Posts")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
+                        .HasForeignKey("BlogId");
                 });
 
             modelBuilder.Entity("CodeFirst.Domain.Entities.Blog", b =>

@@ -11,9 +11,8 @@ namespace CodeFirst.Domain.Entities
         public string? Title { get; set; }
         public string? Content { get; set; }
 
+        //lazy loading
         //public int BlogId { get; set; }
         //public virtual Blog Blog { get; set; }
-
-        //public required Blog Blog { get; set; }
     }
 }
