@@ -34,21 +34,20 @@ namespace CodeFirst.Console
 
             if (blog != null) {
 
-                var post = new Post { Title = "King Lear 2", Content = "Some content here 2" };
+                var post = new Post { Title = "King Lear 3", Content = "Some content here 2" };
 
                 if (blog.Posts.Any())
                 {
                     var fp = blog.Posts.First();
-                    //fp.Title = post.Title;
-                    //fp.Content = post.Content;
+                    fp.Title = post.Title;
+                    fp.Content = post.Content;
 
-                    _db.Entry(fp).CurrentValues.SetValues(post);
+                    //Next cannot be used without DTO, because The property 'Post.PostId' is part of a key and so cannot be modified or marked as modified. 
+                    //_db.Entry(fp).CurrentValues.SetValues(post);
                 }
                 else
                 {
-                    //blog.Posts.Add(post);
-
-                    _db.Add(post);                    
+                    blog.Posts.Add(post);                    
                 }
 
                 await _db.SaveChangesAsync();

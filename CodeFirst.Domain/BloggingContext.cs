@@ -8,16 +8,16 @@ namespace CodeFirst.Domain
     {
         public BloggingContext(DbContextOptions<BloggingContext> options) : base(options) { }
 
-        public DbSet<Blog> Blogs { get; set; }
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<Blog> Blogs => Set<Blog>();
+        public DbSet<Post> Posts => Set<Post>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
 
-
+#if DEVELOPMENT
             modelBuilder.ApplyConfiguration(new BlogConfiguration());
-
+#endif
 
             //modelBuilder.Entity<Blog>()
             //   .HasMany(f => f.Posts)

@@ -3,7 +3,7 @@
     "CodeFirst.Domain": {
       "commandName": "Project",
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development"
+        "DOTNET_ENVIRONMENT": "DEVELOPMENT"
       }
     }
   }
