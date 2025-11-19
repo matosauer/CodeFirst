@@ -9,7 +9,7 @@
         //lazy
         //public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 
-        public ICollection<Post> Posts { get; set; } = new List<Post>();
+        public ICollection<Post> Posts { get; set; } = [];
 
     }
 }

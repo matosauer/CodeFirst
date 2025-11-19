@@ -1,8 +1,17 @@
-﻿@{
+﻿@using CodeFirst.Domain.Entities
+@{
+    @model List<Blog>;
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @foreach(var blog in Model) {
+        <h3>@blog.Name</h3>
+        <ul>
+        @foreach (var post in blog.Posts){
+            <li>@post.Title</li>
+        }
+        </ul>
+    }
 </div>

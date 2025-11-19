@@ -1,21 +1,30 @@
+using CodeFirst.Domain;
+using CodeFirst.Domain.Entities;
 using CodeFirst.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 
 namespace CodeFirst.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(BloggingContext context, ILogger<HomeController> logger) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly BloggingContext _context = context;
+        private readonly ILogger<HomeController> _logger = logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<Blog> list = await _context.Blogs
+                                        .Include(f => f.Posts)
+                                        .ToListAsync();
+
+            return View(list);
         }
 
         public IActionResult Privacy()
