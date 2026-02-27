@@ -10,6 +10,6 @@
         public int BlogId { get; set; }
 
         // navigation property
-        public required Blog Blog { get; set; }
+        //public required Blog Blog { get; set; }
     }
 }

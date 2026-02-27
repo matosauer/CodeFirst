@@ -13,10 +13,17 @@ namespace CodeFirst.Domain.Configuration
             builder.Property(p=>p.Content).HasMaxLength(2000);
 
             // required one-to-many relationship with Blog
+            /*
             builder.HasOne(p => p.Blog)
                    .WithMany(b => b.Posts)
                    .HasForeignKey(p => p.BlogId)
                    .IsRequired();
+            */
+            
+            builder.HasOne<Blog>() // no navigation property on Post
+                   .WithMany(b => b.Posts)
+                   .HasForeignKey(p => p.BlogId)
+                   .IsRequired();       
         }
     }
 }
