@@ -1,18 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CodeFirst.Domain.Entities
+﻿namespace CodeFirst.Domain.Entities
 {
     public class Post
     {
         public int PostId { get; set; }
-        public string? Title { get; set; }
+        public required string Title { get; set; }
         public string? Content { get; set; }
 
-        //lazy loading
-        //public int BlogId { get; set; }
-        //public virtual Blog Blog { get; set; }
+        // foreign key property (non-nullable)
+        public int BlogId { get; set; }
+
+        // navigation property
+        public required Blog Blog { get; set; }
     }
 }

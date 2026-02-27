@@ -11,19 +11,20 @@ namespace CodeFirst.Domain
         public DbSet<Blog> Blogs => Set<Blog>();
         public DbSet<Post> Posts => Set<Post>();
 
+        /*
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(AppSettings.DefaultConnectionString);
+            }
+        }
+        */
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
-#if DEVELOPMENT
             modelBuilder.ApplyConfiguration(new BlogConfiguration());
-#endif
-
-            //modelBuilder.Entity<Blog>()
-            //   .HasMany(f => f.Posts)
-            //   .WithOne(s => s.Blog)
-            //   .HasForeignKey(s => s.BlogId);
-
+            modelBuilder.ApplyConfiguration(new PostConfiguration());
         }
     }
 }

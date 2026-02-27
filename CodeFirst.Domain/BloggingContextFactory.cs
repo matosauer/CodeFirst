@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace CodeFirst.Domain
 {
+    
     public class BloggingContextFactory : IDesignTimeDbContextFactory<BloggingContext>
     {
         public BloggingContext CreateDbContext(string[] args)

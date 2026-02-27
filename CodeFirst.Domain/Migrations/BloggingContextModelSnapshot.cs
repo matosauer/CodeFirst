@@ -29,24 +29,17 @@ namespace CodeFirst.Domain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogId"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("BlogId");
 
                     b.ToTable("Blogs");
-
-                    b.HasData(
-                        new
-                        {
-                            BlogId = 1,
-                            Name = "name"
-                        },
-                        new
-                        {
-                            BlogId = 2,
-                            Name = "second"
-                        });
                 });
 
             modelBuilder.Entity("CodeFirst.Domain.Entities.Post", b =>
@@ -61,10 +54,13 @@ namespace CodeFirst.Domain.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("PostId");
 

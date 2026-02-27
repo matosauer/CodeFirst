@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeFirst.Domain.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20251113155925_BlogSeed")]
-    partial class BlogSeed
+    [Migration("20260227193605_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,19 +32,17 @@ namespace CodeFirst.Domain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogId"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("BlogId");
 
                     b.ToTable("Blogs");
-
-                    b.HasData(
-                        new
-                        {
-                            BlogId = 1,
-                            Name = "name"
-                        });
                 });
 
             modelBuilder.Entity("CodeFirst.Domain.Entities.Post", b =>
@@ -55,14 +53,17 @@ namespace CodeFirst.Domain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"));
 
-                    b.Property<int?>("BlogId")
+                    b.Property<int>("BlogId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("PostId");
 
@@ -73,9 +74,13 @@ namespace CodeFirst.Domain.Migrations
 
             modelBuilder.Entity("CodeFirst.Domain.Entities.Post", b =>
                 {
-                    b.HasOne("CodeFirst.Domain.Entities.Blog", null)
+                    b.HasOne("CodeFirst.Domain.Entities.Blog", "Blog")
                         .WithMany("Posts")
-                        .HasForeignKey("BlogId");
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
                 });
 
             modelBuilder.Entity("CodeFirst.Domain.Entities.Blog", b =>
