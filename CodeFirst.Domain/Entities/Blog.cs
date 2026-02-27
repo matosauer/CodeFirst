@@ -2,7 +2,7 @@
 {
     public class Blog
     {
-        public int BlogId { get; set; }
+        public Guid BlogId { get; set; }
         public required string Name { get; set; }
 
         public string? Description { get; set; }
