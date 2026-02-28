@@ -27,6 +27,11 @@ namespace CodeFirst.Console
 
             using (var scope = host.Services.CreateScope())
             {
+                //1. Initialize the database with some data
+                BloggingContext context = scope.ServiceProvider.GetRequiredService<BloggingContext>();
+                ClassDbInitializer.Initialize(context);
+
+                //2. Run the worker to test some operations
                 scope
                     .ServiceProvider
                     .GetRequiredService<Worker>()

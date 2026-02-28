@@ -9,7 +9,11 @@ namespace CodeFirst.Domain.Configuration
     {
         public void Configure(EntityTypeBuilder<Blog> builder)
         {
-            builder.Property(p=>p.Name).HasMaxLength(100).IsRequired();
+            builder
+                .ToTable("Blogs")
+                .Property(p=>p.Name)
+                .HasMaxLength(100)
+                .IsRequired();
         }
     }
 }

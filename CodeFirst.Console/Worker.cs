@@ -14,26 +14,19 @@ namespace CodeFirst.Console
         {
             System.Console.WriteLine("Hello CodeFirst.Console");
 
-            //var blogs = _db.Blogs.ToList();
-            //System.Console.WriteLine($"Found {blogs.Count} users.");
+            var blogs = _db.Blogs.ToList();
+            System.Console.WriteLine($"Found {blogs.Count} blogs.");
 
             await TestSomething();
 
         }
 
         private async Task TestSomething() {
-            //using (var db = new TestContext())
-            //{
-
-            //when lazy loading is enabled will load posts as well
-            //var blog = _db.Blogs.Find(1);
-
             var blog = await _db.Blogs
                         .Include(f => f.Posts)
-                        .FirstOrDefaultAsync(f => f.BlogId == 1);
+                        .FirstOrDefaultAsync();
 
             if (blog != null) {
-
                 var post = new Post { Title = "King Lear 3", Content = "Some content here 2" };
 
                 if (blog.Posts.Any())
@@ -41,9 +34,6 @@ namespace CodeFirst.Console
                     var fp = blog.Posts.First();
                     fp.Title = post.Title;
                     fp.Content = post.Content;
-
-                    //Next cannot be used without DTO, because The property 'Post.PostId' is part of a key and so cannot be modified or marked as modified. 
-                    //_db.Entry(fp).CurrentValues.SetValues(post);
                 }
                 else
                 {
