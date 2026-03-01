@@ -8,6 +8,7 @@
     <h1 class="display-4">Welcome</h1>
     @foreach(var blog in Model) {
         <h3>@blog.Name</h3>
+        <h2>@blog.State</h2>
         <ul>
         @foreach (var post in blog.Posts){
             <li>@post.Title</li>
