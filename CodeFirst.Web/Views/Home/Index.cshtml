@@ -6,13 +6,19 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    @foreach(var blog in Model) {
-        <h3>@blog.Name</h3>
-        <h2>@blog.State</h2>
-        <ul>
-        @foreach (var post in blog.Posts){
-            <li>@post.Title</li>
-        }
-        </ul>
+         
+    @foreach(var blog in Model) {        
+        <form method="post" action="@Url.Action("ToggleBlogState", "Home", new { id = blog.BlogId })">
+            <h3>@blog.Name</h3>
+            <span>@blog.State</span>
+            <input type="checkbox" value="@blog.BlogId" checked="@(blog.State == State.Published)" onChange="this.form.submit()" />
+
+            <ul>
+            @foreach (var post in blog.Posts){
+                <li>@post.Title</li>
+            }
+            </ul>
+        </form>
     }
+    
 </div>
