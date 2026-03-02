@@ -1,0 +1,23 @@
+@model CodeFirst.Domain.Entities.Blog
+
+@{
+    ViewData["Title"] = "Blog Details";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@Model.Name</h1>
+            <hr />
+            
+            <div class="blog-details">                
+                <p><strong>URL:</strong> @Model.Description</p>
+                <p><strong>State:</strong> @Model.State</p>
+            </div>
+
+            <div class="mt-4">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
