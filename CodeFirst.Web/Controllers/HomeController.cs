@@ -23,6 +23,27 @@ namespace CodeFirst.Web.Controllers
             return View(list);
         }
 
+        [HttpPost(Name = "AddBlog")]
+        public async Task<IActionResult> AddBlog(string blogName)
+        {
+            if (string.IsNullOrWhiteSpace(blogName))
+            {
+                return BadRequest("Blog name is required.");
+            }
+
+            Blog newBlog = new Blog
+            {
+                Name = blogName,
+                State = State.Draft
+            };
+
+            _context.Blogs.Add(newBlog);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        
+
         [HttpPost(Name = "ToggleBlogState")]
         public async Task<IActionResult> ToggleBlogState(Guid? id)
         {
@@ -36,7 +57,7 @@ namespace CodeFirst.Web.Controllers
             if (blog == null)
             {
                 return NotFound();
-            }
+            }            
 
             blog.State = blog.State == State.Draft ? State.Published : State.Draft;
 

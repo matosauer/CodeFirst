@@ -4,9 +4,20 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
          
+    <div>
+        <h2>Add Blog</h2>
+        <form method="post" action="@Url.Action("AddBlog", "Home")">
+            <input type="text" name="blogName" placeholder="Blog Name" required />
+            <button type="submit">Add Blog</button>
+        </form>
+    </div>
+
+    <h2>Blogs</h2>
     @foreach(var blog in Model) {        
         <form method="post" action="@Url.Action("ToggleBlogState", "Home", new { id = blog.BlogId })">
             <h3>@blog.Name</h3>
