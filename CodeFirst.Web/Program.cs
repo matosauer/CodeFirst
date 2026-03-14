@@ -14,7 +14,7 @@ namespace CodeFirst.Web
 
             // EF Core configuration
             builder.Services.AddDbContext<BloggingContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("CodeFirstConnection")));
 
             var app = builder.Build();
 

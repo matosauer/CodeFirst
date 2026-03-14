@@ -12,16 +12,13 @@ namespace CodeFirst.Console
 
         public async Task RunAsync()
         {
-            System.Console.WriteLine("Hello CodeFirst.Console");
+            System.Console.WriteLine("Testing database connection...");
 
             var blogs = _db.Blogs.ToList();
             System.Console.WriteLine($"Found {blogs.Count} blogs.");
-
-            await TestSomething();
-
         }
 
-        private async Task TestSomething() {
+        public async Task AddPostAsync() {
             var blog = await _db.Blogs
                         .Include(f => f.Posts)
                         .FirstOrDefaultAsync();
@@ -41,7 +38,6 @@ namespace CodeFirst.Console
                 }
 
                 await _db.SaveChangesAsync();
-
             }
         }
     }

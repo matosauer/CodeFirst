@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using CodeFirst.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeFirst.Console;
 
@@ -29,12 +31,18 @@ internal class Program
             configuration.Sources.Clear();
             configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);                
             configuration.AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true);
+            configuration.AddEnvironmentVariables();
             configuration.AddCommandLine(args); 
            })
            .ConfigureServices((context, services) =>
            {
-               services.AddScoped<ISampleRepository, SampleRepository>();
-               //services.AddScoped<Worker>();               
+                services.AddScoped<ISampleRepository, SampleRepository>();
+                //services.AddScoped<Worker>();
+
+                services.AddDbContext<BloggingContext>(options =>
+                    options.UseSqlServer(
+                        context.Configuration.GetConnectionString("CodeFirstConnection")
+                    ));
            });
     }        
 }
