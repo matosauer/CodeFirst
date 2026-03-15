@@ -1,27 +1,26 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace CodeFirst.Domain
-{
-    internal static class AppSettings
-    {
-        public static IConfigurationRoot? Configuration
-        {
-            get
-            {
-                var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-                return configuration;
-            }
-        }
+namespace CodeFirst.Domain;
 
-        public static string? DefaultConnectionString
+internal static class AppSettings
+{
+    public static IConfigurationRoot? Configuration
+    {
+        get
         {
-            get
-            {
-                return Configuration?.GetConnectionString("DefaultConnection");
-            }
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+            return configuration;
+        }
+    }
+
+    public static string? CodeFirstConnection
+    {
+        get
+        {
+            return Configuration?.GetConnectionString("CodeFirstConnection");
         }
     }
 }

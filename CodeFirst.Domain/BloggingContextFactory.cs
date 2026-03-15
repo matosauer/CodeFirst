@@ -9,7 +9,7 @@ namespace CodeFirst.Domain
         public BloggingContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<BloggingContext>();
-            optionsBuilder.UseSqlServer(AppSettings.DefaultConnectionString);
+            optionsBuilder.UseSqlServer(AppSettings.CodeFirstConnection);
 
             return new BloggingContext(optionsBuilder.Options);
         }

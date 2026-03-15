@@ -18,9 +18,8 @@ public class Worker
 
     public void Run()
     {        
-        System.Console.WriteLine("Hello CodeFirst.Console");
+        System.Console.WriteLine("CodeFirst.Console Worker is running...");
 
         repository.DoSomething();
     }
-
 }

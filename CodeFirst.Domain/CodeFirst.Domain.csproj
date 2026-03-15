@@ -11,16 +11,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="appsettings.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="appsettings.json">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
 		<!-- EF Core runtime and SQL Server provider -->
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.11" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.11" />
@@ -43,6 +33,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Data\" />
+	  <Folder Include="Properties\" />
 	</ItemGroup>
 
 </Project>
