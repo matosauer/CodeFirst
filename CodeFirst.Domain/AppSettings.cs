@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CodeFirst.Domain;
 
@@ -6,12 +7,13 @@ internal static class AppSettings
 {
     public static IConfigurationRoot? Configuration
     {
-        get
-        {
+        get {
             var configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json", optional: true)
                 .Build();
+
             return configuration;
         }
     }
